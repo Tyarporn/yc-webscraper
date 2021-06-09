@@ -5,10 +5,12 @@ import time
 import csv
 
 # you have to download a webdriver for this to work (I used chrome)
-driver = webdriver.Chrome("/Users/tyarpornsuksant/Downloads/chromedriver")
+'''put your driver path here!!'''
+driver_path = "/Users/tyarpornsuksant/Downloads/chromedriver"
+driver = webdriver.Chrome(driver_path)
 
 
-'''put your url here!'''
+'''put your url here!!'''
 directory_url = "https://www.ycombinator.com/companies/?batch=W21&batch=S20&industry=Virtual%20and%20Augmented%20Reality&industry=Engineering%2C%20Product%20and%20Design&industry=Infrastructure&industry=Retail&industry=Marketing&industry=Supply%20Chain%20and%20Logistics&industry=Human%20Resources&industry=Analytics&industry=Security&industry=Productivity&industry=Banking%20and%20Exchange&industry=Consumer%20Finance&industry=Payments&industry=Credit%20and%20Lending&industry=Insurance&industry=Asset%20Management"
 
 driver.get(directory_url)  # url is from yc directory with filters already attached
