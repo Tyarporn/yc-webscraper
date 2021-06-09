@@ -5,10 +5,10 @@ ______
 1. Open the code on your favorite python interpreter (I used pycharm - it's the best <3)
 2. Install requests, Selenium, and BeautifulSoup. If you don't know how to, go to your terminal and type `pip3 install -r requirements.txt`
 3. Download a web driver. Selenium, which is used in the code to automate scrolling needs this to control a browser. I used Chrome but Selenium also supports  Firefox and IE (may support others). Do note though that if you don't use Chrome, you need to change the driver object:
-    * go to where the code says `driver = webdriver.Chrome("/Users/tyarpornsuksant/Downloads/chromedriver")`
+    * go to where the code says `driver = webdriver.Chrome(driver_path)`
     * change Chrome to whatever you're using
 4. Change the driver path to wherever your driver is 
-    * ie `driver = webdriver.DriverYouAreUsing("/path/to/your/driver")`
+    * ie `driver_path = "/path/to/your/driver"`
 5. Go to the Y-Combinator site then go to the companies tab. 
 6. Apply all the filters you want.
 7. Copy the url now. 
