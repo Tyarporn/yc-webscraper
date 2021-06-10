@@ -9,7 +9,6 @@ import csv
 driver_path = "/Users/tyarpornsuksant/Downloads/chromedriver"
 driver = webdriver.Chrome(driver_path)
 
-
 '''put your url here!!'''
 directory_url = "https://www.ycombinator.com/companies/?batch=W21&batch=S20&industry=Virtual%20and%20Augmented%20Reality&industry=Engineering%2C%20Product%20and%20Design&industry=Infrastructure&industry=Retail&industry=Marketing&industry=Supply%20Chain%20and%20Logistics&industry=Human%20Resources&industry=Analytics&industry=Security&industry=Productivity&industry=Banking%20and%20Exchange&industry=Consumer%20Finance&industry=Payments&industry=Credit%20and%20Lending&industry=Insurance&industry=Asset%20Management"
 
@@ -33,20 +32,24 @@ while True:
 # process the raw html
 source = driver.page_source
 soup = BeautifulSoup(source, 'html.parser')
-company_hrefs = soup.find_all('a', class_="styles-module__company___1UVnl no-hovercard")  # element that houses href links
-# print(x['href'])
+company_hrefs = soup.find_all('a',
+                              class_="styles-module__company___1UVnl no-hovercard")  # element that houses href links
 company_links = []
-for elem in company_hrefs: # populates links for requests
+
+# populates links for requests
+for elem in company_hrefs:
     company_links.append(elem['href'])
-    # print(elem['href'])
-# print(company_links)
 
 url = "https://www.ycombinator.com"
+
+
 # refines location data
 def isolateLocation(facts_text):
     loc_num = facts_text.find("Location")
     return facts_text[loc_num + 9: len(facts_text)]
 
+
+#  refines linkedIn location, returns none if founder's linkedin not found
 def isolateLinkedIn(linkd):
     try:
         found_link = linkd.find('a', class_='social linkedin')
@@ -59,25 +62,25 @@ with open('ycinfo.csv', 'w', newline='') as file:
     writer = csv.writer(file)
     writer.writerow(["title", "location", "founder", "description", "linkedin", "website"])
     for link in company_links:
-        page = requests.get(url + link)
-        soup = BeautifulSoup(page.content, 'html.parser')
+            page = requests.get(url + link)
+            soup = BeautifulSoup(page.content, 'html.parser')
 
-        title = soup.find('h1', class_="font-bold")  # company title
-        facts = soup.find('div', class_='facts')  # location
-        founders = soup.find_all('div', class_='font-bold')  # founder (first one)
-        decrp = soup.find('h3', style="font-size:1.5em;margin-bottom:10px;")  # description
-        linkd = soup.find('div', class_="highlight-box founder-card")  # linkedin
-        website = soup.find('a', target="_blank")  # website
+            title = soup.find('h1', class_="font-bold")  # company title
+            facts = soup.find('div', class_='facts')  # location
+            founders = soup.find_all('div', class_='font-bold')  # founder (first one)
+            decrp = soup.find('h3', style="font-size:1.5em;margin-bottom:10px;")  # description
+            linkd = soup.find('div', class_="highlight-box founder-card")  # linkedin
+            website = soup.find('a', target="_blank")  # website
 
-        # cleaned data
-        clean_ttle = title.text
-        clean_loc = isolateLocation(facts.text)
-        clean_foun = founders[1].text
-        clean_decrp = decrp.text
-        clean_linkd = isolateLinkedIn(linkd)
-        clean_web = website['href']
-        print("Recording " + clean_ttle)
-        writer.writerow([clean_ttle, clean_loc, clean_foun,clean_decrp, clean_linkd, clean_web])
-
-
-
+            # cleaned data
+            clean_ttle = title.text
+            clean_loc = isolateLocation(facts.text)
+            clean_foun = founders[1].text
+            clean_decrp = decrp.text
+            clean_linkd = isolateLinkedIn(linkd)
+            clean_web = website['href']
+            print("Recording " + clean_ttle)
+            try:
+                writer.writerow([clean_ttle, clean_loc, clean_foun, clean_decrp, clean_linkd, clean_web])
+            except:
+                print("There was something wrong with " + clean_ttle + ". It could not be recorded")
