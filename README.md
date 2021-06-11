@@ -13,7 +13,7 @@ ______
 6. Apply all the filters you want.
 7. Copy the url now. 
 8. Go to the code and where it says `directory_url`, delete my url and replace it with yours. 
-9. Run `main.py` (I'll probably change that name later.)
+9. Run `yc-scraper.py` (I'll probably change that name later.)
 10. The code should open a browser and you'll see a browser pop up. DO NOT CLOSE YET. 
 11. When it gets to the very bottom of the page, then it is safe to close. 
 12. You will see a bunch of printed "Recording X " statements. This means it is making the csv file. 
