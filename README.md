@@ -1,6 +1,6 @@
 # yc-webscraper
-Web Scraper for the Y Combinator website
-Finds title (Company), location, founder, description, linkedin, and website
+Web Scraper for the Y Combinator website.
+- Finds title (Company), location, founder, description, linkedin, and website
 ______
 ## Instructions
 1. Clone the repository onto your computer. If you don't know how to do this, follow this [link](https://www.instructables.com/Downloading-Code-From-GitHub/)
